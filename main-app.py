@@ -57,6 +57,12 @@ def performCalcLoop(calc):
             print("Memory cleared.\n")
         elif choice == 'mrc':
             displayResult(calc.MRC())
+        elif choice == 'deg':
+            calc.switchUnitsMode("DEG")
+            print("Angle mode: degrees\n")
+        elif choice == 'rad':
+            calc.switchUnitsMode("RAD")
+            print("Angle mode: radians\n")
         elif choice == 'tip':
             try:
                 runTipCalculator(calc)

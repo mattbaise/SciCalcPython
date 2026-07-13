@@ -48,6 +48,12 @@ class TestStringMethods(unittest.TestCase):
         c.MC()
 
         self.assertEqual(c.memory, 0.0 )
+
+    def test_switch_units_mode(self):
+        c = Calculator()
+        c.switchUnitsMode("rad")
+
+        self.assertEqual(c.angle_mode, "RAD")
     
 
 if __name__ == '__main__':

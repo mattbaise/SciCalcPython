@@ -57,13 +57,18 @@ class Calculator:
     def celsius_to_fahrenheit(self, celsius):
         return celsius * 9 / 5 + 32
 
-    def switchDisplayMode(self, mode):
+    def switchUnitsMode(self, mode):
+        mode = mode.upper()
         if mode == "DEG":
             self.angle_mode = "DEG"
         elif mode == "RAD":
             self.angle_mode = "RAD"
         else:
             raise ValueError("Invalid mode. Please choose 'DEG' or 'RAD'.")
+
+    def switchDisplayMode(self, mode):
+        """Backward-compatible name for switching trig units."""
+        self.switchUnitsMode(mode)
 
     def M_plus(self):
         self.memory += self.state
