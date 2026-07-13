@@ -1,6 +1,7 @@
 class Calculator:
 
     def __init__(self):
+        self.state = 0.0
         self.memory = 0.0
         self.angle_mode = "DEG"
 
@@ -37,6 +38,25 @@ class Calculator:
     def switchsign(self, x):
         return x * -1
 
+    def calculate_tip(self, bill_amount, tip_percent, people=1):
+        """Return the tip, total bill, and amount owed by each person."""
+        if bill_amount < 0:
+            raise ValueError("Bill amount cannot be negative.")
+        if tip_percent < 0:
+            raise ValueError("Tip percentage cannot be negative.")
+        if people <= 0:
+            raise ValueError("Number of people must be at least 1.")
+
+        tip = bill_amount * (tip_percent / 100)
+        total = bill_amount + tip
+        return round(tip, 2), round(total, 2), round(total / people, 2)
+
+    def fahrenheit_to_celsius(self, fahrenheit):
+        return (fahrenheit - 32) * 5 / 9
+
+    def celsius_to_fahrenheit(self, celsius):
+        return celsius * 9 / 5 + 32
+
     def switchDisplayMode(self, mode):
         if mode == "DEG":
             self.angle_mode = "DEG"
@@ -45,13 +65,16 @@ class Calculator:
         else:
             raise ValueError("Invalid mode. Please choose 'DEG' or 'RAD'.")
 
-    def M(self, value):
-        self.memory = value
+    def M_plus(self):
+        self.memory += self.state
+        self.state = self.memory
 
     def MC(self):
         self.memory = 0.0
 
     def MRC(self):
-        return self.memory
+        self.state = self.memory
+        return self.state
+
 
 # add lots more methods to this calculator class.

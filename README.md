@@ -72,6 +72,11 @@
 
 In addition to the Core and Scientific features, you are required to create at least two of your own features for the calculator. They can be any two features that are not already covered and that you can implement as you see fit. These features must be properly tested.
 
+This version includes two custom features:
+
+- Enter `tip` to calculate a tip, bill total, and amount each person owes.
+- Enter `temp` to convert temperatures between Fahrenheit and Celsius.
+
 ### Hints
 
 The following functions should take the displayed value (x) and updated it according to the given formula: (this may not be an exhaustive list)

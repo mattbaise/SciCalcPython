@@ -34,61 +34,109 @@ def getOneNumber():
 def displayResult(x: float):
     print(x, "\n")
 
+def runTipCalculator(calc):
+    bill = float(input("Bill amount? $"))
+    percentage = float(input("Tip percentage? "))
+    people = int(input("How many people are splitting the bill? "))
+    tip, total, per_person = calc.calculate_tip(bill, percentage, people)
+    calc.state = total
+    print(f"Tip: ${tip:.2f}")
+    print(f"Total: ${total:.2f}")
+    print(f"Each person pays: ${per_person:.2f}\n")
+
 def performCalcLoop(calc):
     while True:
         choice = input("Operation? ")
         if choice == 'q':
             break
+        elif choice == 'm+':
+            calc.M_plus()
+            displayResult(calc.state)
+        elif choice == 'mc':
+            calc.MC()
+            print("Memory cleared.\n")
+        elif choice == 'mrc':
+            displayResult(calc.MRC())
+        elif choice == 'tip':
+            try:
+                runTipCalculator(calc)
+            except ValueError as e:
+                print(f"Error: {e}")
+        elif choice == 'temp':
+            try:
+                runTemperatureConverter(calc)
+            except ValueError as e:
+                print(f"Error: {e}")
         elif choice == 'add':
             try:
                 a, b = getTwoNumbers()
-                displayResult(calc.add(a, b))
+                calc.state = calc.add(a, b)
+                displayResult(calc.state)
             except ValueError as e:
                 print(f"Error: {e}")
         elif choice == 'sub':
             try:
                 a, b = getTwoNumbers()
-                displayResult(calc.sub(a, b))
+                calc.state = calc.sub(a, b)
+                displayResult(calc.state)
             except ValueError as e:
                 print(f"Error: {e}")
         elif choice == 'divide':
             try:
                 a, b = getTwoNumbers()
-                displayResult(calc.divide(a, b))
+                calc.state = calc.divide(a, b)
+                displayResult(calc.state)
             except ValueError as e:
                 print(f"Error: {e}")
         elif choice == 'sqrt':
             try:
                 a = getOneNumber()
-                displayResult(calc.sqrt(a))
+                calc.state = calc.sqrt(a)
+                displayResult(calc.state)
             except ValueError as e:
                 print(f"Error: {e}")
         elif choice == 'square':
             try:
                 a = getOneNumber()
-                displayResult(calc.square(a))
+                calc.state = calc.square(a)
+                displayResult(calc.state)
             except ValueError as e:
                 print(f"Error: {e}")
         elif choice == 'exponent':
             try:
                 a, b = getTwoNumbers()
-                displayResult(calc.exponent(a, b))
+                calc.state = calc.exponent(a, b)
+                displayResult(calc.state)
             except ValueError as e:
                 print(f"Error: {e}")
         elif choice == 'inverse':
             try:
                 a = getOneNumber()
-                displayResult(calc.inverse(a))
+                calc.state = calc.inverse(a)
+                displayResult(calc.state)
             except ValueError as e:
                 print(f"Error: {e}")
         elif choice == 'switchsign':
             try:
                 a = getOneNumber()
-                displayResult(calc.switchsign(a))
+                calc.state = calc.switchsign(a)
+                displayResult(calc.state)
             except ValueError as e:
                 print(f"Error: {e}")
         else:
             print("That is not a valid input.")
+
+def runTemperatureConverter(calc):
+    unit = input("Convert from Fahrenheit or Celsius? (F/C) ").upper()
+    temperature = float(input("Temperature? "))
+    if unit == "F":
+        calc.state = calc.fahrenheit_to_celsius(temperature)
+        print(f"{temperature:.2f}°F = {calc.state:.2f}°C\n")
+    elif unit == "C":
+        calc.state = calc.celsius_to_fahrenheit(temperature)
+        print(f"{temperature:.2f}°C = {calc.state:.2f}°F\n")
+    else:
+        raise ValueError("Please enter F or C.")
 
 # main start
 def main():
