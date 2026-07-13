@@ -1,4 +1,26 @@
 from calculator import Calculator
+from datetime import datetime
+
+def display_title():
+    now= datetime.now()
+
+    print("=" *60)
+    print("Welcome Data General's Scientific Calculator")
+    print("=" *60)
+    print("Current date:", now.strftime("%B %D,%Y"))
+    print("Current time:", now.strftime("%H:%M:%S"))
+    print("=" *60)
+
+def display_end_title():
+    print("=" * 60)
+    print("     Thank you for using Data General's")
+    print("        Scientific Calculator")
+    print()
+    print("         Until next time, goodbye!")
+    print("=" * 60)
+
+
+    print("Type 'q' to quit.\n")
 
 def getTwoNumbers():
     a = float(input("first number? "))
@@ -70,9 +92,16 @@ def performCalcLoop(calc):
 
 # main start
 def main():
+    display_title()
+
     calc = Calculator()
     performCalcLoop(calc)
+
+    display_end_title()
+
     print("Done Calculating.")
+
 
 if __name__ == '__main__':
     main()
+    
