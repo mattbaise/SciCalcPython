@@ -4,7 +4,12 @@ import math
 class Calculator:
 
     def __init__(self):
-        pass
+        self.state = 0.0
+        self.memory = 0.0
+        self.angle_mode = "DEG"
+
+    def init(self, state):
+        self.state = state
 
     def add(self, x, y):
         return x + y
@@ -17,11 +22,15 @@ class Calculator:
 
     def division(self, x, y):
         return x / y
-
+        if y == 0:
+            raise ValueError("Cannot divide by zero.")
     def square(self, x):
         return x * x
 
     def squareRoot(self, x):
+        return x ** 0.5
+      if x < 0:
+            raise ValueError("Cannot take square root of negative number.")
         return x ** 0.5
 
     def variableExponent(self, x, y):
@@ -77,6 +86,53 @@ class Calculator:
     def radianToDegree(self, x):
         return x * (180 / math.pi)
     
+    def inverse(self, x):
+        if x == 0:
+            raise ValueError("Cannot take inverse of zero.")
+        return 1 / x
+      
+    def calculate_tip(self, bill_amount, tip_percent, people=1):
+        """Return the tip, total bill, and amount owed by each person."""
+        if bill_amount < 0:
+            raise ValueError("Bill amount cannot be negative.")
+        if tip_percent < 0:
+            raise ValueError("Tip percentage cannot be negative.")
+        if people <= 0:
+            raise ValueError("Number of people must be at least 1.")
+
+        tip = bill_amount * (tip_percent / 100)
+        total = bill_amount + tip
+        return round(tip, 2), round(total, 2), round(total / people, 2)
+      
+      def fahrenheit_to_celsius(self, fahrenheit):
+        return (fahrenheit - 32) * 5 / 9
+
+    def celsius_to_fahrenheit(self, celsius):
+        return celsius * 9 / 5 + 32
+
+    def switchUnitsMode(self, mode):
+        mode = mode.upper()
+        if mode == "DEG":
+            self.angle_mode = "DEG"
+        elif mode == "RAD":
+            self.angle_mode = "RAD"
+        else:
+            raise ValueError("Invalid mode. Please choose 'DEG' or 'RAD'.")
+
+    def switchDisplayMode(self, mode):
+        """Backward-compatible name for switching trig units."""
+        self.switchUnitsMode(mode)
+
+    def M_plus(self):
+        self.memory += self.state
+        self.state = self.memory
+
+    def MC(self):
+        self.memory = 0.0
+
+    def MRC(self):
+        self.state = self.memory
+        return self.state
 
 
 
