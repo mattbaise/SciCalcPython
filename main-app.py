@@ -32,8 +32,14 @@ def getOneNumber():
     return a
 # Easter Egg Check
 def check_easter_egg(operation):
+    print(operation)
+
     if operation == 2813308004:
         print("WHO?? MIKE JONES!!")
+
+def getOneNumber():
+    a = float(input("number? "))
+    return a
 
 def displayResult(x: float):
     print(x, "\n")
@@ -161,6 +167,9 @@ def performCalcLoop(calc):
                 a, b = getTwoNumbers()
                 calc.state = calc.add(a, b)
                 displayResult(calc.state)
+                check_easter_egg(a)
+                check_easter_egg(b)
+                displayResult(calc.add(a, b))
             except ValueError as e:
                 print(f"Error: {e}")
         elif choice == 'sub':
